@@ -38,10 +38,11 @@ int main()
 	APP_STATE state = ENTER_SPLASH;
 	Menu menu;
 	menu.init();
-	float t = sfw::getDeltaTime();
+	float t;
 
 	while (sfw::stepContext())
 	{
+		t = sfw::getDeltaTime();
 		switch (state)
 		{
 		case ENTER_SPLASH:
@@ -75,8 +76,8 @@ int main()
 			break;
 		case GAMEPLAY:
 			state = gameplay_level_ptr->next(state);
-			gameplay_level_ptr->step();
 			gameplay_level_ptr->draw();
+			gameplay_level_ptr->step(t);
 			break;
 		case ENTER_CREDITS:
 			credits_page_ptr = new Credits;

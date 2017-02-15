@@ -48,9 +48,6 @@
     <ClCompile Include="Components\ShapeDraw.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Components\SpaceshipRenderer.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Components\Test.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -131,9 +128,6 @@
     <ClInclude Include="Components\ShapeDraw.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\SpaceShipRenderer.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Components\Test.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -162,6 +156,12 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\ObjectPool.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpriteRenderer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
