@@ -167,7 +167,6 @@
     <ClCompile Include="Components\Shapes.cpp" />
     <ClCompile Include="Components\SpaceshipController.cpp" />
     <ClCompile Include="Components\SpaceshipLocomotion.cpp" />
-    <ClCompile Include="Components\SpaceshipRenderer.cpp" />
     <ClCompile Include="Components\Test.cpp" />
     <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="Components\Vec2.cpp" />
@@ -193,12 +192,13 @@
     <ClInclude Include="Components\ShapeDraw.h" />
     <ClInclude Include="Components\Shapes.h" />
     <ClInclude Include="Components\SpaceshipLocomotion.h" />
-    <ClInclude Include="Components\SpaceShipRenderer.h" />
+    <ClInclude Include="Components\SpriteRenderer.h" />
     <ClInclude Include="Components\SplashPage.h" />
     <ClInclude Include="Components\Test.h" />
     <ClInclude Include="Components\Transform.h" />
     <ClInclude Include="Components\Vec2.h" />
     <ClInclude Include="Components\Vec3.h" />
+    <ClInclude Include="Controllers.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Gameplay.h" />
     <ClInclude Include="Menu.h" />
