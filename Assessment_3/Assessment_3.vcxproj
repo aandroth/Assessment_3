@@ -71,17 +71,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Components;C:\Users\Aquin\Source\Repos\Assessment_3\Lib;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Aquin\Source\Repos\Assessment_3\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Components;C:\Users\Aquin\Source\Repos\Assessment_3\Lib;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Aquin\Source\Repos\Assessment_3\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -91,12 +97,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Aquin\Source\Repos\Assessment_3\Lib;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfw_d.lib;Math_Library.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -108,10 +114,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Aquin\Source\Repos\Assessment_3\Lib;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Math_Library.lib;sfw.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,14 +133,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Aquin\Source\Repos\Assessment_3\Lib;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Components;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfw.lib;Math_Library.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -145,12 +154,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Aquin\Source\Repos\Assessment_3\Lib;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Math_Library.lib;sfw.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
