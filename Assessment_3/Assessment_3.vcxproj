@@ -179,13 +179,15 @@
     <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Collider.h" />
     <ClInclude Include="Components\Collision.h" />
+    <ClInclude Include="Components\Factory.h" />
     <ClInclude Include="Components\Flops.h" />
     <ClInclude Include="Components\Mat2.h" />
     <ClInclude Include="Components\Mat3.h" />
     <ClInclude Include="Components\NGonGame.h" />
+    <ClInclude Include="Components\ObjectPool.h" />
+    <ClInclude Include="Components\ParticleEmitter.h" />
     <ClInclude Include="Components\PlanetMotor.h" />
     <ClInclude Include="Components\PlanetRenderer.h" />
-    <ClInclude Include="Components\PlayerTransform.h" />
     <ClInclude Include="Components\ReflectionFns.h" />
     <ClInclude Include="Components\RigidBody.h" />
     <ClInclude Include="Components\ShapeDraw.h" />

@@ -87,6 +87,7 @@ void Menu::draw()
 
 	sfw::drawTexture(exit_button, sfw::getMouseX(), sfw::getMouseY(), 10, 10);
 }
+
 void Menu::step()
 {
 	if (playButton.mouseUp())

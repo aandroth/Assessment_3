@@ -1,10 +1,12 @@
 #pragma once
 #include "States.h"
+#include "Components\Factory.h"
 
 class GamePlay
 {
 	unsigned credits_page_background;
 	APP_STATE state;
+	Factory factory;
 
 public:
 	void init();
@@ -23,6 +25,23 @@ void FillObjectPool()
 void TakeInputFromPlayer()
 {
 
+	if (sfw::getKey('W'))
+	{
+		
+	}
+	else if (sfw::getKey('S'))
+	{
+		
+	}
+
+	if (sfw::getKey('A'))
+	{
+
+	}
+	else if (sfw::getKey('D'))
+	{
+
+	}
 }
 
 void GamePlay::init()

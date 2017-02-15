@@ -152,10 +152,16 @@
     <ClInclude Include="Components\Mat2.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\PlayerTransform.h">
+    <ClInclude Include="Components\Mat3.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Mat3.h">
+    <ClInclude Include="Components\Factory.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ParticleEmitter.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ObjectPool.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
