@@ -8,12 +8,19 @@ void drawCircle(const Circle &circle, unsigned color)
 	sfw::drawCircle(circle.m_pos.x, circle.m_pos.y, circle.m_radius, 12, color);
 }
 
-void drawAABB(const AABB &aabb, unsigned color)
+void drawAABB(const Mat3 &T, const AABB &aabb, unsigned color)
 {
-	sfw::drawLine(aabb.min().x, aabb.min().y, aabb.min().x, aabb.max().y, color); // bl -> tl
-	sfw::drawLine(aabb.min().x, aabb.max().y, aabb.max().x, aabb.max().y, color); // tl -> tr
-	sfw::drawLine(aabb.max().x, aabb.max().y, aabb.max().x, aabb.min().y, color); // tr -> br
-	sfw::drawLine(aabb.max().x, aabb.min().y, aabb.min().x, aabb.min().y, color); // br -> bl
+	Vec3 glob = T * Vec3(aabb.m_pos.x, aabb.m_pos.y, 1);
+
+	sfw::drawLine(glob.x - aabb.m_he.x, glob.y - aabb.m_he.y, glob.x - aabb.m_he.x, glob.y + aabb.m_he.y, color); // bl -> tl
+	sfw::drawLine(glob.x - aabb.m_he.x, glob.y + aabb.m_he.y, glob.x + aabb.m_he.x, glob.y + aabb.m_he.y, color); // tl -> tr
+	sfw::drawLine(glob.x + aabb.m_he.x, glob.y + aabb.m_he.y, glob.x + aabb.m_he.x, glob.y - aabb.m_he.y, color); // tr -> br
+	sfw::drawLine(glob.x + aabb.m_he.x, glob.y - aabb.m_he.y, glob.x - aabb.m_he.x, glob.y - aabb.m_he.y, color); // br -> bl
+
+	//sfw::drawLine(aabb.min().x, aabb.min().y, aabb.min().x, aabb.max().y, color); // bl -> tl
+	//sfw::drawLine(aabb.min().x, aabb.max().y, aabb.max().x, aabb.max().y, color); // tl -> tr
+	//sfw::drawLine(aabb.max().x, aabb.max().y, aabb.max().x, aabb.min().y, color); // tr -> br
+	//sfw::drawLine(aabb.max().x, aabb.min().y, aabb.min().x, aabb.min().y, color); // br -> bl
 }
 
 void drawBox(const Box &BOX, unsigned color)

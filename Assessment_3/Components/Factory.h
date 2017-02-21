@@ -9,18 +9,20 @@ struct entity
 {
 	class Factory *factory;
 	ObjectPool<Transform>::iterator      trans;
-	//ObjectPool<RigidBody>::iterator  rb;
-	ObjectPool<Controller*>::iterator     cntlr;
+	ObjectPool<RigidBody>::iterator      rb;
+	ObjectPool<Controller*>::iterator    cntlr;
 	ObjectPool<SpriteRenderer>::iterator sprite;
+	ObjectPool<AABB>::iterator           aabb;
 	//ObjectPool<lifetime>::iterator   life;
 	//ObjectPool<particle>::iterator   parti;
 
 	void onFree()
 	{
 		if (trans)  trans.free();
-		//if (rb)     rb.free();
+		if (rb)     rb.free();
 		if (cntlr)  cntlr.free();
 		if (sprite) sprite.free();
+		if (aabb)   aabb.free();
 		//if (life)   life.free();
 		//if (parti)  parti.free();
 	}
@@ -30,16 +32,17 @@ class Factory
 {
 	ObjectPool<entity>         entities;
 	ObjectPool<Transform>      transforms;
-	//ObjectPool<RigidBody>  rigidbodies;
+	ObjectPool<RigidBody>      rigidbodies;
 	ObjectPool<Controller*>    controllers;
 	ObjectPool<SpriteRenderer> sprites;
+	ObjectPool<AABB>		   AABBs;
 	//ObjectPool<lifetime>   lifetimes;
 	//ObjectPool<particle>   particles;
 
 public:
 
-	Factory() : entities(512), transforms(512), /*rigidbodies(512),*/ controllers(512),
-				sprites(512)/*, lifetimes(512), particles(512) */
+	Factory() : entities(512), transforms(512), rigidbodies(512), controllers(512),
+				sprites(512), AABBs(512) /*, lifetimes(512), particles(512) */
 	{}
 
 	ObjectPool<entity>::iterator destroy(ObjectPool<entity>::iterator &h) { h->onFree(); return h.free(); }
@@ -77,10 +80,11 @@ public:
 		retVal->factory = this;
 
 		//retVal->life   = lifetimes.push();
-		retVal->trans = transforms.push();
-		retVal->sprite = sprites.push();
-		retVal->cntlr = controllers.push();
-		//retVal->rb     = rigidbodies.push();
+		retVal->trans    = transforms.push();
+		retVal->sprite   = sprites.push();
+		retVal->cntlr    = controllers.push();
+		retVal->aabb     = AABBs.push();
+		retVal->rb       = rigidbodies.push();
 		//retVal->parti  = particles.push();
 
 		//retVal->life->time_lived = 0;
@@ -93,9 +97,15 @@ public:
 		//retVal->parti->sColor.ui_color = WHITE;
 		//retVal->parti->eColor.ui_color = WHITE;
 
+		retVal->aabb->m_pos = retVal->trans->m_position;
+		retVal->aabb->m_he = Vec2(50, 50);
+
+		retVal->rb->mass = 1;
+		retVal->rb->addImpulse(Vec2(-100, 0));
+
 		retVal->sprite->m_sprite = sprite_id;
 		retVal->sprite->m_color  = WHITE;
-		retVal->sprite->m_size   = Vec2(100, 100);
+		retVal->sprite->m_size = Vec2(100, 100);
 
 		*retVal->cntlr = new ControllerPlayer();
 

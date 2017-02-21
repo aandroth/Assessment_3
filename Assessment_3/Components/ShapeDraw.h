@@ -5,7 +5,7 @@
 
 void drawCircle(const Circle &C, unsigned color = YELLOW);
 
-void drawAABB(const AABB &aabb, unsigned color = YELLOW);
+void drawAABB(const Mat3 &T, const AABB &aabb, unsigned color = GREEN);
 
 void drawBox(const Box &BOX, unsigned color = RED);
 

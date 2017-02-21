@@ -158,10 +158,10 @@
     <ClInclude Include="Components\ObjectPool.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers.h">
+    <ClInclude Include="Components\SpriteRenderer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\SpriteRenderer.h">
+    <ClInclude Include="Components\Controllers.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>

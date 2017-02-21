@@ -1,9 +1,10 @@
 #pragma once
-
 #include "Test.h"
 #include "Transform.h"
 #include "sfwdraw.h"
+#include "Camera.h"
 #include <iostream>
+using std::cout;
 
 class RigidBody
 {
@@ -11,7 +12,8 @@ public:
 	Vec2 force, impulse;
 	Vec2 velocity, accelleration;
 	float angularVelocity = 0, angularAccelleration, torque;
-	float mass;
+	float mass, drag;
+	bool isStatic;
 
 	RigidBody();
 
@@ -27,6 +29,6 @@ public:
 	void setVelocity(Vec2);
 	Vec2 getVelocity() const;
 
-	void debugDraw(Transform);
+	void debugDraw(const Mat3 & T, const Transform);
 };
 

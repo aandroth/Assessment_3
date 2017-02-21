@@ -63,6 +63,19 @@ AABB::AABB(Vec2 new_pos, Vec2 new_he)
 	m_he = new_he;
 }
 
+Vec2* AABB::verts()
+{
+	Vec2 vec2_arr[4];
+	Vec2 *verts = vec2_arr;
+
+	verts[0] = Vec2(min().x, max().y);
+	verts[1] = Vec2(min().x, min().y);
+	verts[2] = Vec2(max().x, min().y);
+	verts[3] = Vec2(max().x, max().y);
+
+	return verts;
+}
+
 Vec2 AABB::min() const
 {
 	return m_pos - m_he;

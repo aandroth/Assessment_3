@@ -26,6 +26,7 @@ struct AABB
 
 	Vec2 min() const;
 	Vec2 max() const;
+	Vec2* verts();
 };
 AABB operator*(const Mat3 &MAT3, const AABB &aabb);
 

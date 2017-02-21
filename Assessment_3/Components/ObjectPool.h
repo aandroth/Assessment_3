@@ -46,11 +46,11 @@ public:
 		size_t m_idx;
 		iterator() : m_ref(nullptr), m_idx(0) {}
 
-		T &operator* () { return m_ref->m_data[m_idx].data; }
+		T &operator* () { return  m_ref->m_data[m_idx].data; }
 		T *operator->() { return &m_ref->m_data[m_idx].data; }
 		T *operator& () { return &m_ref->m_data[m_idx].data; }
 
-		const T &operator* () const { return m_ref->m_data[m_idx].data; }
+		const T &operator* () const { return  m_ref->m_data[m_idx].data; }
 		const T *operator->() const { return &m_ref->m_data[m_idx].data; }
 		const T *operator& () const { return &m_ref->m_data[m_idx].data; }
 		

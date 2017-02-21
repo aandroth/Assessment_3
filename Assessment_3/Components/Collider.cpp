@@ -37,8 +37,6 @@ void Collider::debugDraw(const Mat3 &T, const Transform &Trans, unsigned color)
 	origPoint = (glob * Vec3(origPoint.x, origPoint.y, 1)).xy();
 
 	sfw::drawLine(lastPoint.x, lastPoint.y, origPoint.x, origPoint.y, color);
-
-	drawAABB(glob * aabb, color);
 }
 
 CollisionData ColliderCollision(const Transform &TA, const Collider &CA,
