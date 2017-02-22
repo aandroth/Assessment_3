@@ -9,7 +9,7 @@ class ObjectPool
 		size_t next;
 		T data;
 	};
-public:
+
 	__intern *m_data;
 	size_t m_size;
 	size_t openHead, fillHead;
@@ -36,7 +36,7 @@ public:
 	}
 
 	class iterator
-	{	public:
+	{
 		ObjectPool *m_ref;
 
 		friend class ObjectPool;
@@ -70,6 +70,10 @@ public:
 
 	iterator push(const T &val = T())
 	{
+		cout << openHead << ", ";
+		cout << m_size << "\n";
+		cout << openHead << ", " << m_size << "\n";
+		cout << openHead << ", " << m_size << "\n";
 		if (openHead >= m_size)
 			return iterator();
 
