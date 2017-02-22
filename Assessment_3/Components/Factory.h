@@ -104,7 +104,7 @@ public:
 	ObjectPool<entity>::iterator spawnPlayer(unsigned sprite_id)
 	{
 		auto retVal = entities.push();
-		cout << retVal.m_idx;
+		//cout << retVal.m_idx;
 		if (!retVal) return retVal;
 		retVal->factory = this;
 

@@ -4,6 +4,10 @@ Collider::Collider(const Vec2 * verts, int size) : hull(verts, size)
 {
 	int xMin = INFINITY, xMax = -INFINITY, yMin = INFINITY, yMax = -INFINITY;
 	Vec2 pos, he;
+	cout << "verts[0].x: " << verts[0].x << "verts[0].y: " << verts[0].y << "\n";
+	cout << "verts[1].x: " << verts[1].x << "verts[1].y: " << verts[1].y << "\n";
+	cout << "verts[2].x: " << verts[2].x << "verts[2].y: " << verts[2].y << "\n";
+	cout << "verts[3].x: " << verts[3].x << "verts[3].y: " << verts[3].y << "\n";
 	for (int ii = 0; ii < size; ++ii)
 	{
 		xMin > verts[ii].x ? verts[ii].x : xMin;
@@ -44,12 +48,15 @@ CollisionData ColliderCollision(const Transform &TA, const Collider &CA,
 {
 	// Check if the AABBs overlap
 	CollisionData collData;
-	collData = aabbCollision(TA.getGlobalTransform() * CA.aabb, TB.getGlobalTransform() * CB.aabb);
+	collData = aabbCollision(/*TA.getGlobalTransform() **/ CA.aabb, /*TB.getGlobalTransform() * */CB.aabb);
 
+	cout << "CA.aabb.max.x: " << CA.aabb.max().x << ", CA.aabb.min.x: " << CA.aabb.min().x << "\n";
+	cout << "CA.aabb.m_he.x: " << CA.aabb.m_he.x << ", CA.aabb.m_he.y: " << CA.aabb.m_he.y << "\n";
 	// If the AABBs collide, check if the Hulls collide
 	if (collData.m_penetrationDepth >= 0)
 	{
-		collData = HullCollision(TA.getGlobalTransform() * CA.hull, TB.getGlobalTransform() * CB.hull);
+		//cout << "collData.m_penetrationDepth: " << collData.m_penetrationDepth << "\n";
+		collData = HullCollision(/*TA.getGlobalTransform() * */CA.hull, /*TB.getGlobalTransform() * */CB.hull);
 	}
 
 	return collData;

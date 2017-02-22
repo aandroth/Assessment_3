@@ -10,8 +10,6 @@ class GamePlay
 	APP_STATE state;
 	Factory *factory, *wall_factory;
 	Camera world_camera;
-
-
 public:
 
 	void FillObjectPool();
@@ -40,15 +38,17 @@ void GamePlay::init()
 
 	// Create Walls
 	wall_factory->spawnWall(player_sprite, 800, 850, 1600, 50);
-	wall_factory->spawnWall(player_sprite, 50, 450, 50, 900);
-	wall_factory->spawnWall(player_sprite, 1550, 450, 50, 900);
-	wall_factory->spawnWall(player_sprite, 800, 25, 1600, 50);
+	//wall_factory->spawnWall(player_sprite, 50, 450, 50, 900);
+	//wall_factory->spawnWall(player_sprite, 1550, 450, 50, 900);
+	//wall_factory->spawnWall(player_sprite, 800, 25, 1600, 50);
 }
 
 void GamePlay::draw()
 {
 	sfw::drawTexture(credits_page_background, 800, 450, 1600, 900);
 	//drawAABB(world_camera.getCameraTransform(), *wall_top.aabb);
+	drawAABB(world_camera.getCameraTransform(), *wall_factory->begin()->aabb, RED);
+	drawAABB(world_camera.getCameraTransform(), *factory->begin()->aabb, RED);
 }
 
 void GamePlay::step(float t)
@@ -76,16 +76,20 @@ void GamePlay::step(float t)
 				if (!collision.resultIsCollision())
 				{
 					 // Do nothing
-					cout << "Do nothing\n";
 				}
 				else
 				{
-					cout << "Do something\n";
+					//cout << "Do something\n";
 					Collider colliderWall((*w->aabb).verts(), 4);
 					Collider colliderChar((*e->aabb).verts(), 4);
+					Vec2 *v = (*w->aabb).verts();
+					cout << "v.x: " << v[0].x << ", v.y: " << v[0].y << "\n";
+					cout << "v[1].x: " << v[1].x << ", v[1].y: " << v[1].y << "\n";
+					cout << "v[2].x: " << v[2].x << ", v[2].y: " << v[2].y << "\n";
+					cout << "v[3].x: " << v[3].x << ", v[3].y: " << v[3].y << "\n";
 					StaticResolution((*e->trans), (*e->rb), colliderChar, (*w->trans), colliderWall, 0);
-					(*e->rb).integrate(*e->trans, t);
-					e->aabb->m_pos = e->trans->m_position;
+					//(*e->rb).integrate(*e->trans, t);
+					//e->aabb->m_pos = e->trans->m_position;
 				}
 				w->sprite->draw(world_camera.getCameraTransform(), *w->trans);
 				++w;

@@ -70,10 +70,10 @@ public:
 
 	iterator push(const T &val = T())
 	{
-		cout << openHead << ", ";
-		cout << m_size << "\n";
-		cout << openHead << ", " << m_size << "\n";
-		cout << openHead << ", " << m_size << "\n";
+		//cout << openHead << ", ";
+		//cout << m_size << "\n";
+		//cout << openHead << ", " << m_size << "\n";
+		//cout << openHead << ", " << m_size << "\n";
 		if (openHead >= m_size)
 			return iterator();
 

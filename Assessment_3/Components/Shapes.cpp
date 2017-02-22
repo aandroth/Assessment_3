@@ -65,8 +65,7 @@ AABB::AABB(Vec2 new_pos, Vec2 new_he)
 
 Vec2* AABB::verts()
 {
-	Vec2 vec2_arr[4];
-	Vec2 *verts = vec2_arr;
+	Vec2 *verts = new Vec2[4];
 
 	verts[0] = Vec2(min().x, max().y);
 	verts[1] = Vec2(min().x, min().y);
