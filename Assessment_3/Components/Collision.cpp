@@ -36,7 +36,7 @@ CollisionDataSwept1D collisionDetectionSwept1D(float Amin, float Amax,
 		denom_1 = Avel - Bvel;
 
 	float tl = (Amin - Bmax) / denom_0,
-		  tr = (Bmin - Amax) /denom_1;
+		  tr = (Bmin - Amax) / denom_1;
 
 	collisionDataDetectionSwept.m_entryTime =  fmin(tl, tr);
 	collisionDataDetectionSwept.m_exitTime  =  fmax(tl, tr);

@@ -119,7 +119,7 @@ public:
 		//retVal->life->time_lived = 0;
 		//retVal->life->lifespan   = -1;
 
-		retVal->trans->m_position = Vec2{ 400, 300 };
+		retVal->trans->m_position = Vec2{ 400, 750 };
 		retVal->trans->m_scale = Vec2{ 50, 50 };
 		//retVal->parti->sDim  = vec2{ 32, 32 };
 		//retVal->parti->eDim  = vec2{ 32, 32 };

@@ -1,19 +1,16 @@
 #include "Collider.h"
+#include <numeric>
 
 Collider::Collider(const Vec2 * verts, int size) : hull(verts, size)
 {
-	int xMin = INFINITY, xMax = -INFINITY, yMin = INFINITY, yMax = -INFINITY;
+	int xMin = INT_MAX, xMax = INT_MIN, yMin = INT_MAX, yMax = INT_MIN;
 	Vec2 pos, he;
-	cout << "verts[0].x: " << verts[0].x << "verts[0].y: " << verts[0].y << "\n";
-	cout << "verts[1].x: " << verts[1].x << "verts[1].y: " << verts[1].y << "\n";
-	cout << "verts[2].x: " << verts[2].x << "verts[2].y: " << verts[2].y << "\n";
-	cout << "verts[3].x: " << verts[3].x << "verts[3].y: " << verts[3].y << "\n";
 	for (int ii = 0; ii < size; ++ii)
 	{
-		xMin > verts[ii].x ? verts[ii].x : xMin;
-		xMax < verts[ii].x ? verts[ii].x : xMax;
-		yMin > verts[ii].y ? verts[ii].y : yMin;
-		yMax < verts[ii].y ? verts[ii].y : yMax;
+		xMin > verts[ii].x ? xMin = verts[ii].x : xMin;
+		xMax < verts[ii].x ? xMax = verts[ii].x : xMax;
+		yMin > verts[ii].y ? yMin = verts[ii].y : yMin;
+		yMax < verts[ii].y ? yMax = verts[ii].y : yMax;
 	}
 	he = Vec2((xMax - xMin)*0.5, (yMax - yMin)*0.5);
 	pos = Vec2(xMin + he.x, yMin + he.y);
@@ -48,10 +45,8 @@ CollisionData ColliderCollision(const Transform &TA, const Collider &CA,
 {
 	// Check if the AABBs overlap
 	CollisionData collData;
-	collData = aabbCollision(/*TA.getGlobalTransform() **/ CA.aabb, /*TB.getGlobalTransform() * */CB.aabb);
-
-	cout << "CA.aabb.max.x: " << CA.aabb.max().x << ", CA.aabb.min.x: " << CA.aabb.min().x << "\n";
-	cout << "CA.aabb.m_he.x: " << CA.aabb.m_he.x << ", CA.aabb.m_he.y: " << CA.aabb.m_he.y << "\n";
+	collData = aabbCollision(/*TA.getGlobalTransform() * */CA.aabb, /*TB.getGlobalTransform() * */CB.aabb);
+	Vec2 *verts = CA.aabb.verts();
 	// If the AABBs collide, check if the Hulls collide
 	if (collData.m_penetrationDepth >= 0)
 	{
@@ -66,10 +61,13 @@ CollisionData StaticResolution(Transform & TA, RigidBody & RA, Collider CA,
 								Transform & TB, Collider CB, float bounciness)
 {
 	CollisionData collData = ColliderCollision(TA, CA, TB, CB);
-
+	CollisionData collDataAABB = aabbCollision(CA.aabb, CB.aabb);
+	cout << "CA.aabb.max.x: " << CA.aabb.max().x << ", CA.aabb.min.x: " << CA.aabb.min().x << "\n";
+	cout << "CA.aabb.m_he.x: " << CA.aabb.m_he.x << ", CA.aabb.m_he.y: " << CA.aabb.m_he.y << "\n";
 	Vec2 A_initVel = RA.getVelocity();
+	cout << "collData.m_penetrationDepth: " << collData.m_penetrationDepth << "\n";
 
-	if (collData.m_penetrationDepth >= 0)
+	if (collData.m_penetrationDepth > 0)
 	{
 		Vec2 MTV = collData.m_collisionNormal * collData.m_penetrationDepth;
 		TA.m_position -= MTV;

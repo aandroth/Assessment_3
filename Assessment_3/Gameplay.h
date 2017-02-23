@@ -62,7 +62,7 @@ void GamePlay::step(float t)
 		{
 			//cout << "draw sprite \n";
 			e->sprite->draw(world_camera.getCameraTransform(), *e->trans);
-			drawAABB(world_camera.getCameraTransform(), *e->aabb, GREEN);
+			//drawAABB(world_camera.getCameraTransform(), *e->aabb, RED);
 		}
 		// Controller system
 		if (e->cntlr && e->trans)
@@ -82,16 +82,13 @@ void GamePlay::step(float t)
 					//cout << "Do something\n";
 					Collider colliderWall((*w->aabb).verts(), 4);
 					Collider colliderChar((*e->aabb).verts(), 4);
-					Vec2 *v = (*w->aabb).verts();
-					cout << "v.x: " << v[0].x << ", v.y: " << v[0].y << "\n";
-					cout << "v[1].x: " << v[1].x << ", v[1].y: " << v[1].y << "\n";
-					cout << "v[2].x: " << v[2].x << ", v[2].y: " << v[2].y << "\n";
-					cout << "v[3].x: " << v[3].x << ", v[3].y: " << v[3].y << "\n";
+					cout << "e->rb->velocity: " << e->rb->velocity.x << ", " << e->rb->velocity.y << "\n";
 					StaticResolution((*e->trans), (*e->rb), colliderChar, (*w->trans), colliderWall, 0);
-					//(*e->rb).integrate(*e->trans, t);
-					//e->aabb->m_pos = e->trans->m_position;
+					cout << "e->rb->velocity: " << e->rb->velocity.x << ", " << e->rb->velocity.y << "\n";
+					(*e->rb).integrate(*e->trans, t);
+					e->aabb->m_pos = e->trans->m_position;
 				}
-				w->sprite->draw(world_camera.getCameraTransform(), *w->trans);
+				//w->sprite->draw(world_camera.getCameraTransform(), *w->trans);
 				++w;
 			}
 

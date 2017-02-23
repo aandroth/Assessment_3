@@ -55,15 +55,37 @@ AABB::AABB(float pos_x, float pos_y, float he_x, float he_y)
 {
 	m_pos = Vec2(pos_x, pos_y);
 	m_he = Vec2(he_x, he_y);
+	m_vel = Vec2(0, 0);
 }
 
 AABB::AABB(Vec2 new_pos, Vec2 new_he)
 {
 	m_pos = new_pos;
 	m_he = new_he;
+	m_vel = Vec2(0, 0);
+}
+
+AABB AABB::operator=(const AABB other)
+{
+	m_pos = other.m_pos;
+	m_he = other.m_he;
+	m_vel = other.m_vel;
+	return *this;
 }
 
 Vec2* AABB::verts()
+{
+	Vec2 *verts = new Vec2[4];
+
+	verts[0] = Vec2(min().x, max().y);
+	verts[1] = Vec2(min().x, min().y);
+	verts[2] = Vec2(max().x, min().y);
+	verts[3] = Vec2(max().x, max().y);
+
+	return verts;
+}
+
+Vec2* AABB::verts() const
 {
 	Vec2 *verts = new Vec2[4];
 
