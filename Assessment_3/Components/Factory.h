@@ -40,9 +40,10 @@ class Factory
 	//ObjectPool<particle>   particles;
 
 public:
+	size_t m_size;
 
-	Factory() : entities(512), transforms(512), rigidbodies(512), controllers(512),
-				sprites(512), AABBs(512) /*, lifetimes(512), particles(512) */
+	Factory(int a_size) : m_size(a_size), entities(a_size), transforms(a_size), rigidbodies(a_size), controllers(a_size),
+				sprites(a_size), AABBs(a_size) /*, lifetimes(a_size), particles(a_size) */
 	{}
 
 	ObjectPool<entity>::iterator destroy(ObjectPool<entity>::iterator &h) { h->onFree(); return h.free(); }
@@ -73,9 +74,37 @@ public:
 		return retVal;
 	}
 
+	ObjectPool<entity>::iterator spawnWall(unsigned sprite_id, float xPos, float yPos,
+															   float xDim, float yDim)
+	{
+		auto retVal = entities.push();
+		if (!retVal) return retVal;
+		retVal->factory = this;
+
+		retVal->trans = transforms.push();
+		retVal->sprite = sprites.push();
+		retVal->aabb = AABBs.push();
+		retVal->rb = rigidbodies.push();
+
+		retVal->trans->m_position = Vec2{ xPos, yPos };
+		retVal->trans->m_scale = Vec2{ xDim, yDim };
+
+		retVal->aabb->m_pos = retVal->trans->m_position;
+		retVal->aabb->m_he = Vec2(xDim*0.5, yDim*0.5);
+
+		retVal->rb->mass = 1;
+
+		retVal->sprite->m_sprite = sprite_id;
+		retVal->sprite->m_color = WHITE;
+		retVal->sprite->m_size = Vec2(xDim, yDim);
+
+		return retVal;
+	}
+
 	ObjectPool<entity>::iterator spawnPlayer(unsigned sprite_id)
 	{
-		ObjectPool<entity>::iterator retVal = entities.push();
+		auto retVal = entities.push();
+		//cout << retVal.m_idx;
 		if (!retVal) return retVal;
 		retVal->factory = this;
 
@@ -90,7 +119,7 @@ public:
 		//retVal->life->time_lived = 0;
 		//retVal->life->lifespan   = -1;
 
-		retVal->trans->m_position = Vec2{ 400, 300 };
+		retVal->trans->m_position = Vec2{ 400, 750 };
 		retVal->trans->m_scale = Vec2{ 50, 50 };
 		//retVal->parti->sDim  = vec2{ 32, 32 };
 		//retVal->parti->eDim  = vec2{ 32, 32 };

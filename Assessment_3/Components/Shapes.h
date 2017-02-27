@@ -23,10 +23,12 @@ struct AABB
 	AABB();
 	AABB(float pos_x, float pos_y, float dim_x, float dim_y);
 	AABB(Vec2 new_pos, Vec2 new_dim);
+	AABB operator=(const AABB);
 
 	Vec2 min() const;
 	Vec2 max() const;
 	Vec2* verts();
+	Vec2* verts() const;
 };
 AABB operator*(const Mat3 &MAT3, const AABB &aabb);
 

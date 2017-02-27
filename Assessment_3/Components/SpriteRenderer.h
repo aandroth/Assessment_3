@@ -30,10 +30,10 @@ struct SpriteRenderer
 		//sfw::drawLine(F.x, F.y, R.x, R.y, m_color);
 		//sfw::drawLine(R.x, R.y, B.x, B.y, m_color);
 		//sfw::drawLine(B.x, B.y, L.x, L.y, m_color);
-		
-		cout << "trans: " << trans.m_position.x << ", " << trans.m_position.y << "\n";
-		cout << "C: " << C.x << ", " << C.y << "\n";
-		cout << m_size.x << ", " << m_size.y << "\n";
+		//
+		//cout << "trans: " << trans.m_position.x << ", " << trans.m_position.y << "\n";
+		//cout << "C: " << C.x << ", " << C.y << "\n";
+		//cout << m_size.x << ", " << m_size.y << "\n";
 
 		sfw::drawTexture(m_sprite, C.x, C.y, m_size.x, m_size.y, 0, true, 0, WHITE);
 	}

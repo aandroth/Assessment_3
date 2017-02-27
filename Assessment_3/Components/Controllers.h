@@ -7,7 +7,7 @@ protected:
 	float m_speed;
 public:
 	Controller() {}
-	virtual void Update(RigidBody &rb, Transform &trans, float t) { cout << "Controller Update\n"; }
+	virtual void Update(RigidBody &rb, Transform &trans, float t) { cout << "Controller is udating instead of the correct controller!!!!\n"; }
 };
 
 class ControllerPlayer : public Controller

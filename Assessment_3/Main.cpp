@@ -71,6 +71,7 @@ int main()
 			break;
 		case ENTER_GAMEPLAY:
 			gameplay_level_ptr = new GamePlay();
+			gameplay_level_ptr->FillObjectPool();
 			gameplay_level_ptr->init();
 			state = GAMEPLAY;
 			break;

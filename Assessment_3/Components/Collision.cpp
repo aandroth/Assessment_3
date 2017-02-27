@@ -36,7 +36,7 @@ CollisionDataSwept1D collisionDetectionSwept1D(float Amin, float Amax,
 		denom_1 = Avel - Bvel;
 
 	float tl = (Amin - Bmax) / denom_0,
-		  tr = (Bmin - Amax) /denom_1;
+		  tr = (Bmin - Amax) / denom_1;
 
 	collisionDataDetectionSwept.m_entryTime =  fmin(tl, tr);
 	collisionDataDetectionSwept.m_exitTime  =  fmax(tl, tr);
@@ -73,7 +73,9 @@ CollisionData aabbCollision(const AABB &A,
 
 	CollisionData1D collisionX = collisionDetection1D(A.min().x, A.max().x, B.min().x, B.max().x);
 	CollisionData1D	collisionY = collisionDetection1D(A.min().y, A.max().y, B.min().y, B.max().y);
-	cout << "collisionX.m_penetrationDepth: " << collisionX.m_penetrationDepth << "\n";
+
+	//cout << "collisionX.m_penetrationDepth: " << collisionX.m_penetrationDepth << "\n";
+	//cout << "collisionY.m_penetrationDepth: " << collisionY.m_penetrationDepth << "\n";
 	if (collisionX.m_penetrationDepth < collisionY.m_penetrationDepth)
 	{
 		retVal.m_penetrationDepth = collisionX.m_penetrationDepth;
