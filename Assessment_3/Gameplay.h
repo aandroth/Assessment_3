@@ -12,6 +12,7 @@ class GamePlay
 	Camera world_camera;
 	//entity wall_top, wall_left, wall_right, wall_bottom;
 	ObjectPool<entity> wall_pool{4};
+	AABB wall;
 
 	void FillObjectPool();
 
@@ -39,21 +40,21 @@ void GamePlay::init()
 	factory.spawnPlayer(player_sprite);
 
 	// Create Walls
-	*wall_top.aabb = AABB(800, 850, 800, 25);
-	*wall_top.rb = RigidBody();
-	*wall_top.trans = Transform(800, 850, 1600, 50, 0);
+	//*wall_top.aabb = AABB(800, 850, 800, 25);
+	//*wall_top.rb = RigidBody();
+	//*wall_top.trans = Transform(800, 850, 1600, 50, 0);
 
-	*wall_left.aabb = AABB(50, 450, 25, 450);
-	*wall_left.rb = RigidBody();
-	*wall_left.trans = Transform(50, 450, 50, 900, 0);
+	//*wall_left.aabb = AABB(50, 450, 25, 450);
+	//*wall_left.rb = RigidBody();
+	//*wall_left.trans = Transform(50, 450, 50, 900, 0);
 
-	*wall_right.aabb = AABB(1550, 450, 25, 450);
-	*wall_right.rb = RigidBody();
-	*wall_right.trans = Transform(1550, 450, 50, 900, 0);
+	//*wall_right.aabb = AABB(1550, 450, 25, 450);
+	//*wall_right.rb = RigidBody();
+	//*wall_right.trans = Transform(1550, 450, 50, 900, 0);
 
-	*wall_bottom.aabb = AABB(800, 25, 800, 25);
-	*wall_bottom.rb = RigidBody();
-	*wall_bottom.trans = Transform(800, 25, 1600, 50, 0);
+	//*wall_bottom.aabb = AABB(800, 25, 800, 25);
+	//*wall_bottom.rb = RigidBody();
+	//*wall_bottom.trans = Transform(800, 25, 1600, 50, 0);
 
 }
 
@@ -88,15 +89,15 @@ void GamePlay::step(float t)
 
 		//Walls Collision System
 		// Top
-		CollisionData collision = aabbCollision(*wall_top.aabb, *(e->aabb));
-		if (collision.resultIsCollision())
-		{
-			Collider colliderWall((*wall_top.aabb).verts(), 4);
-			Collider colliderChar((*e->aabb).verts(), 4);
-			StaticResolution((*e->trans), (*e->rb), colliderChar, (*wall_top.trans), colliderWall, 0);
-			(*e->rb).integrate(*e->trans, t);
-			e->aabb->m_pos = e->trans->m_position;
-		}
+		//CollisionData collision = aabbCollision(*wall_top.aabb, *(e->aabb));
+		//if (collision.resultIsCollision())
+		//{
+		//	Collider colliderWall((*wall_top.aabb).verts(), 4);
+		//	Collider colliderChar((*e->aabb).verts(), 4);
+		//	StaticResolution((*e->trans), (*e->rb), colliderChar, (*wall_top.trans), colliderWall, 0);
+		//	(*e->rb).integrate(*e->trans, t);
+		//	e->aabb->m_pos = e->trans->m_position;
+		//}
 
 		//*wall_left.aabb = AABB(50, 450, 25, 450);
 

@@ -73,7 +73,7 @@ CollisionData aabbCollision(const AABB &A,
 
 	CollisionData1D collisionX = collisionDetection1D(A.min().x, A.max().x, B.min().x, B.max().x);
 	CollisionData1D	collisionY = collisionDetection1D(A.min().y, A.max().y, B.min().y, B.max().y);
-
+	cout << "collisionX.m_penetrationDepth: " << collisionX.m_penetrationDepth << "\n";
 	if (collisionX.m_penetrationDepth < collisionY.m_penetrationDepth)
 	{
 		retVal.m_penetrationDepth = collisionX.m_penetrationDepth;
