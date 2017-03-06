@@ -15,7 +15,7 @@ Collider::Collider(const Vec2 * verts, int size) : hull(verts, size)
 	he = Vec2((xMax - xMin)*0.5, (yMax - yMin)*0.5);
 	pos = Vec2(xMin + he.x, yMin + he.y);
 
-	aabb = AABB(pos, he);
+	aabb = AABB(pos, he);	
 }
 
 void Collider::debugDraw(const Mat3 &T, const Transform &Trans, unsigned color)
@@ -47,6 +47,7 @@ CollisionData ColliderCollision(const Transform &TA, const Collider &CA,
 	CollisionData collData;
 	collData = aabbCollision(/*TA.getGlobalTransform() * */CA.aabb, /*TB.getGlobalTransform() * */CB.aabb);
 	Vec2 *verts = CA.aabb.verts();
+	//cout << "aabbData.m_penetrationDepth: " << collData.m_penetrationDepth << "\n";
 	// If the AABBs collide, check if the Hulls collide
 	if (collData.m_penetrationDepth >= 0)
 	{
@@ -62,10 +63,10 @@ CollisionData StaticResolution(Transform & TA, RigidBody & RA, Collider CA,
 {
 	CollisionData collData = ColliderCollision(TA, CA, TB, CB);
 	CollisionData collDataAABB = aabbCollision(CA.aabb, CB.aabb);
-	cout << "CA.aabb.max.x: " << CA.aabb.max().x << ", CA.aabb.min.x: " << CA.aabb.min().x << "\n";
-	cout << "CA.aabb.m_he.x: " << CA.aabb.m_he.x << ", CA.aabb.m_he.y: " << CA.aabb.m_he.y << "\n";
+	//cout << "CA.aabb.max.x: " << CA.aabb.max().x << ", CA.aabb.min.x: " << CA.aabb.min().x << "\n";
+	//cout << "CA.aabb.m_he.x: " << CA.aabb.m_he.x << ", CA.aabb.m_he.y: " << CA.aabb.m_he.y << "\n";
 	Vec2 A_initVel = RA.getVelocity();
-	cout << "collData.m_penetrationDepth: " << collData.m_penetrationDepth << "\n";
+	//cout << "collData.m_penetrationDepth: " << collData.m_penetrationDepth << "\n";
 
 	if (collData.m_penetrationDepth > 0)
 	{

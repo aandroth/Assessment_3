@@ -156,10 +156,14 @@ CollisionData HullCollision(const Hull &Hull_0, const Hull &Hull_1)
 	for (int ii = 0; ii < Hull_0.m_size; ++ii)
 	{
 		allNormalsArr[ii] = Hull_0.m_normals[ii];
+		//cout << "allNormalsArr[" << ii << "]: " << allNormalsArr[ii].x << ", " << allNormalsArr[ii].y << "\n";
+		//cout << "Hull_0.norms[" << ii << "]: " << Hull_0.m_normals[ii].x << ", " << Hull_0.m_normals[ii].y << "\n";
 	}	
 	for (int ii = Hull_0.m_size, jj = 0; jj < Hull_1.m_size; ++ii, ++jj)
 	{
 		allNormalsArr[ii] = Hull_1.m_normals[jj];
+		//cout << "allNormalsArr[" << ii << "]: " << allNormalsArr[ii].x << ", " << allNormalsArr[ii].y << "\n";
+		//cout << "Hull_1.vert[" << ii << "]: " << Hull_1.m_vertArray[jj].x << ", " << Hull_1.m_vertArray[jj].y << "\n";
 	}
 
 	// Go through each normal, to find the axis of collision
@@ -186,6 +190,8 @@ CollisionData HullCollision(const Hull &Hull_0, const Hull &Hull_1)
 		pDl = bMax - aMin;
 
 		pD = fminf(pDr, pDl);
+		//cout << "allNormalsArr[" << ii << "]: " << allNormalsArr[ii].x << ", " << allNormalsArr[ii].y << "\n";
+		//cout << "pD: " << pD << "\n";
 
 		Dir = copysignf(1, pDl - pDr);
 

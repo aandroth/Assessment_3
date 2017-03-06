@@ -265,7 +265,7 @@ void Hull::updateNormals()
 		m_normals[ii] = perp(normal(m_vertArray[ii + 1] - m_vertArray[ii]));
 	}
 
-	m_normals[m_size] = perp(normal(m_vertArray[0] - m_vertArray[m_size]));
+	m_normals[m_size-1] = perp(normal(m_vertArray[0] - m_vertArray[m_size-1]));
 }
 
 bool operator==(const Hull &lhs, const Hull &rhs)

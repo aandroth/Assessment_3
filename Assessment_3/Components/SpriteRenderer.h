@@ -35,6 +35,6 @@ struct SpriteRenderer
 		//cout << "C: " << C.x << ", " << C.y << "\n";
 		//cout << m_size.x << ", " << m_size.y << "\n";
 
-		sfw::drawTexture(m_sprite, C.x, C.y, m_size.x, m_size.y, 0, true, 0, WHITE);
+		sfw::drawTexture(m_sprite, C.x, C.y, m_size.x, m_size.y, trans.m_facing, true, 0, WHITE);
 	}
 };

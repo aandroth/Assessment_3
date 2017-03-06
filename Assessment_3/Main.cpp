@@ -76,7 +76,7 @@ int main()
 			state = GAMEPLAY;
 			break;
 		case GAMEPLAY:
-			state = gameplay_level_ptr->next(state);
+			state = gameplay_level_ptr->next();
 			gameplay_level_ptr->draw();
 			gameplay_level_ptr->step(t);
 			break;
