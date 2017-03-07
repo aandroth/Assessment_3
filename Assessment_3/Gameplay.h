@@ -11,6 +11,7 @@ class GamePlay
 	Factory *factory, *wall_factory;
 	Camera world_camera;
 	bool gameIsOver;
+	ObjectPool<entity>::iterator player_ptr, boss_ptr;
 public:
 
 	void FillObjectPool();
@@ -43,8 +44,8 @@ void GamePlay::init()
 	damaged_sprite = sfw::loadTextureMap("./Images/Damaged_Box.png");
 	blackout_sprite = sfw::loadTextureMap("./Images/Blackout_Box.png");
 
-	factory->spawnBoss(boss_sprite, damaged_sprite);
-	factory->spawnPlayer(player_sprite, damaged_sprite);
+	boss_ptr   = factory->spawnBoss(boss_sprite, damaged_sprite);
+	player_ptr = factory->spawnPlayer(player_sprite, damaged_sprite);
 
 	// Create Walls
 	wall_factory->spawnWall(player_sprite, 800, 850, 1600, 50);
@@ -68,98 +69,122 @@ void GamePlay::draw()
 
 void GamePlay::step(float t)
 {
-	auto player = factory->begin();
 	//cout << "step \n";
 	for (auto e = factory->begin(); e != factory->end();)
 	{
-		if ((*e->cntlr)->isAlive) {}
-		else
+		if (e == factory->begin() && (*e->cntlr)->isAlive)
+		{
+			if ((*e->cntlr)->creep_0_activate)
+			{
+				factory->spawnCreep(creep_sprite, damaged_sprite, (*e->cntlr)->getSpawnLocation((*e->trans).m_position, (*player_ptr->trans).m_position));
+				(*e->cntlr)->creep_0_activate = false;
+				(*e->cntlr)->creep_0_active = true;
+			}
+		}
+		else if(e == factory->begin() && !(*e->cntlr)->isAlive)
 		{
 			gameIsOver = true;
 			return;
 		}
+		//if (e != factory->begin() && !(*e->cntlr)->isPlayerAlly && !(*e->cntlr)->isAlive)
+		//{
+		//	(*boss_ptr->cntlr)->creep_0_activate = true;
+		//}
 
-		//cout << "for loop \n";
-		if (e->sprite)
+		if ((*e->cntlr)->isAlive)
 		{
-			//cout << "draw sprite \n";
-			if((*(e->cntlr))->showDamageSprite)
-				e->damage_taken_sprite->draw(world_camera.getCameraTransform(), *e->trans);
-			else
-				e->sprite->draw(world_camera.getCameraTransform(), *e->trans);
-			//drawAABB(world_camera.getCameraTransform(), *e->aabb, RED);
-		}
-		// Controller system
-		if (e->cntlr && e->trans)
-		{
-			int attackCode = (*(e->cntlr))->Update(*e->rb, *e->trans, 1, t);
-			if (attackCode == 0) {/* Do nothing*/ }
-			else if (attackCode == 1)
+			//cout << "for loop \n";
+			if (e->sprite)
 			{
-				float facing = e->trans->m_facing;
-				Vec2 pos = e->trans->m_position;
-				factory->spawnPlayerWeapon(sword_sprite, sword_sprite, facing, pos);
+				if ((*(e->cntlr))->showDamageSprite)
+					e->damage_taken_sprite->draw(world_camera.getCameraTransform(), *e->trans);
+				else
+					e->sprite->draw(world_camera.getCameraTransform(), *e->trans);
 			}
-			else if (attackCode == 2) { factory->destroy(e); continue; }
-
-			//Walls Collision System
-			if (e != factory->begin() && !((*e->cntlr)->isWeapon))
+			// Controller system
+			if (e->cntlr && e->trans)
 			{
-				for (auto w = wall_factory->begin(); w != wall_factory->end();)
+				int attackCode = (*(e->cntlr))->Update(*e->rb, *e->trans, 1, t);
+				if (attackCode == 0) {/* Do nothing*/ }
+				else if (attackCode == 1)
 				{
-					CollisionData collision = aabbCollision(*e->aabb, *(w->aabb));
-					if (!collision.resultIsCollision())
-					{
-						// Do nothing
-					}
-					else
-					{
-						Collider colliderWall((*w->aabb).verts(), 4);
-						Collider colliderChar((*e->aabb).verts(), 4);
-						//cout << "e->rb->velocity: " << e->rb->velocity.x << ", " << e->rb->velocity.y << "\n";
-						StaticResolution((*e->trans), (*e->rb), colliderChar, (*w->trans), colliderWall, 0);
-						//cout << "e->rb->velocity: " << e->rb->velocity.x << ", " << e->rb->velocity.y << "\n";
-						e->aabb->m_pos = e->trans->m_position;
-					}
-					//w->sprite->draw(world_camera.getCameraTransform(), *w->trans);
-					++w;
+					float facing = e->trans->m_facing;
+					Vec2 pos = e->trans->m_position;
+					factory->spawnPlayerWeapon(sword_sprite, sword_sprite, facing, pos);
 				}
-			}
-			auto f = e;
-			++f;
-			for (; f != factory->end(); ++f)
-			{
-				CollisionData collision = aabbCollision(*e->aabb, *(f->aabb));
-				if (collision.resultIsCollision())
+				else if (attackCode == 2) 
 				{
+					factory->destroy(e); 
+					continue; 
+				}
 
-					if (((*e->cntlr)->isWeapon) && ((*e->cntlr)->isPlayerAlly != (*f->cntlr)->isPlayerAlly))
+				//Walls Collision System
+				if (e != factory->begin() && !((*e->cntlr)->isWeapon))
+				{
+					for (auto w = wall_factory->begin(); w != wall_factory->end();)
 					{
-						(*f->cntlr)->takeDamage((*e->cntlr)->getDamage());
-					}
-					else if (((*f->cntlr)->isWeapon) && ((*e->cntlr)->isPlayerAlly != (*f->cntlr)->isPlayerAlly))
-					{
-						(*e->cntlr)->takeDamage((*f->cntlr)->getDamage());
-					}
-					else if (e != factory->begin())
-					{
+						CollisionData collision = aabbCollision(*e->aabb, *(w->aabb));
+						if (!collision.resultIsCollision())
 						{
-							Collider colliderWall((*f->aabb).verts(), 4);
+							// Do nothing
+						}
+						else
+						{
+							Collider colliderWall((*w->aabb).verts(), 4);
 							Collider colliderChar((*e->aabb).verts(), 4);
-							//cout << "e->rb->velocity: " << e->rb->velocity.x << ", " << e->rb->velocity.y << "\n";
-							StaticResolution((*e->trans), (*e->rb), colliderChar, (*f->trans), colliderWall, 0);
-							//cout << "e->rb->velocity: " << e->rb->velocity.x << ", " << e->rb->velocity.y << "\n";
+							StaticResolution((*e->trans), (*e->rb), colliderChar, (*w->trans), colliderWall, 0);
 							e->aabb->m_pos = e->trans->m_position;
+						}
+						++w;
+					}
+				}
+
+				auto f = e;
+				++f;
+				for (; f != factory->end(); ++f)
+				{
+					if ((*f->cntlr)->isAlive)
+					{
+						CollisionData collision = aabbCollision(*e->aabb, *(f->aabb));
+						if (collision.resultIsCollision())
+						{
+							if (((*e->cntlr)->isWeapon) && !((*f->cntlr)->isPlayerAlly) && ((*e->cntlr)->isPlayerAlly != (*f->cntlr)->isPlayerAlly))
+							{
+								(*f->cntlr)->takeDamage((*e->cntlr)->getDamage());
+							}
+							else if (((*f->cntlr)->isWeapon) && !((*e->cntlr)->isPlayerAlly) && ((*e->cntlr)->isPlayerAlly != (*f->cntlr)->isPlayerAlly))
+							{
+								(*e->cntlr)->takeDamage((*f->cntlr)->getDamage());
+							}
+							if (e != factory->begin() && !(*f->cntlr)->isPlayerAlly)
+							{
+								Collider colliderWall((*f->aabb).verts(), 4);
+								Collider colliderChar((*e->aabb).verts(), 4);
+								StaticResolution((*e->trans), (*e->rb), colliderChar, (*f->trans), colliderWall, 10);
+								e->aabb->m_pos = e->trans->m_position;
+							}
 						}
 					}
 				}
+				e->aabb->m_pos = e->trans->m_position;
+				(*e->rb).integrate(*e->trans, t);
+				e->rb->debugDraw(world_camera.getCameraTransform(), *e->trans);
 			}
-			e->aabb->m_pos = e->trans->m_position;
-			(*e->rb).integrate(*e->trans, t);
-			e->rb->debugDraw(world_camera.getCameraTransform(), *e->trans);
+			++e;
 		}
-		++e;
+		else
+		{
+			factory->destroy(e);
+			(*boss_ptr->cntlr)->creep_0_activate = true;
+			(*boss_ptr->cntlr)->creep_0_active = false;
+			continue;
+		}
 	}
+
+	if ((*(boss_ptr->cntlr))->showDamageSprite)
+		boss_ptr->damage_taken_sprite->draw(world_camera.getCameraTransform(), *boss_ptr->trans);
+	else
+		boss_ptr->sprite->draw(world_camera.getCameraTransform(), *boss_ptr->trans);
 }
 
 APP_STATE GamePlay::next()
