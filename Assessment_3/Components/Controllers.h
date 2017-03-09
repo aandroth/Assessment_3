@@ -10,10 +10,14 @@ protected:
 	bool isAttacking;
 public:
 	bool isBeingDamaged, isWeapon, isPlayerAlly, isAlive, showDamageSprite;
+	bool creep_0_active, creep_1_active, creep_2_active;
+	bool creep_0_activate, creep_1_activate, creep_2_activate;
+
 	Controller() {}
 	virtual int Update(RigidBody &rb, Transform &trans, unsigned sprite, float t) { cout << "Controller is updating instead of the correct controller!!!!\n"; return 0; }
 	virtual void takeDamage(unsigned damage) {}
 	virtual unsigned getDamage() { return m_damage; }
+	virtual Vec2 getSpawnLocation(Vec2 boss_pos, Vec2 player_pos) { return Vec2(0, 0); }
 };
 
 class ControllerPlayer : public Controller
@@ -127,10 +131,8 @@ public:
 class ControllerCreep : public Controller
 {
 public:
-	ControllerCreep() {
-		showDamageSprite = false, isAlive = true, isBeingDamaged = false, isAttacking = false, isWeapon = false, isPlayerAlly = false,
-			m_damage = 0, m_speed = 400, m_health = 100, damageTimer = 0, damageTimerLimit = 0.25;
-	}
+	ControllerCreep() { showDamageSprite = false, isAlive = true, isBeingDamaged = false, isAttacking = false, isWeapon = true, isPlayerAlly = false,
+			m_damage = 10, m_speed = 400, m_health = 20, damageTimer = 0, damageTimerLimit = 0.3; }
 
 	int Update(RigidBody &rb, Transform &trans, unsigned sprite, float t)
 	{
@@ -142,7 +144,7 @@ public:
 		{
 			rb.setVelocity(Vec2(m_speed, 0));
 		}
-
+*/
 		if (isBeingDamaged)
 		{
 			damageTimer += t;
@@ -161,7 +163,7 @@ public:
 				else
 					showDamageSprite = true;
 			}
-		}*/
+		}
 		return 0;
 	}
 
@@ -186,18 +188,16 @@ class ControllerBoss : public Controller
 {
 public:
 	ControllerBoss() { showDamageSprite = false, isAlive = true, isBeingDamaged = false, isAttacking = false, isWeapon = false, isPlayerAlly = false,
-						m_damage = 0, m_speed = 400, m_health = 100, damageTimer = 0, damageTimerLimit = 0.25;}
-
-	bool creep_0_active, creep_1_active, creep_2_active;
-	bool creep_0_activate, creep_1_activate, creep_2_activate;
+						m_damage = 0, m_speed = 400, m_health = 100, damageTimer = 0, damageTimerLimit = 0.3,
+						creep_0_active = false, creep_1_active = false, creep_2_active = false, creep_0_activate = false, creep_1_activate = false, creep_2_activate = false;}
 
 	int Update(RigidBody &rb, Transform &trans, unsigned sprite, float t)
 	{
-		if (trans.m_position.x >= 1900)
+		if (trans.m_position.x >= 1700)
 		{
 			rb.setVelocity(Vec2(-m_speed, 0));
 		}
-		else if (trans.m_position.x <= -400)
+		else if (trans.m_position.x <= 000)
 		{
 			rb.setVelocity(Vec2(m_speed, 0));
 		}
@@ -214,7 +214,6 @@ public:
 			creep_2_activate = true;
 		}
 
-
 		if (isBeingDamaged)
 		{
 			damageTimer += t;
@@ -226,14 +225,13 @@ public:
 			}
 			else
 			{
-				if (damageTimer < damageTimerLimit*0.25)
+				if (damageTimer < damageTimerLimit*0.5)
 					showDamageSprite = true;
-				else if (damageTimer >= damageTimerLimit*0.25 && damageTimer < damageTimerLimit*0.5)
+				else if (damageTimer >= damageTimerLimit*0.5 && damageTimer < damageTimerLimit*0.75)
 					showDamageSprite = false;
 				else
 					showDamageSprite = true;
 			}
-
 		}
 
 		return 0;
@@ -254,4 +252,51 @@ public:
 	}
 
 	unsigned getDamage() { return m_damage; }
+
+	Vec2 getSpawnLocation(Vec2 boss_pos, Vec2 player_pos)
+	{
+		bool top = true, left = true, right = true, bottom = true;
+		Vec2 place_creep_pos;
+		// Consider top
+		if (player_pos.y < boss_pos.y)
+			bottom = false;
+		else
+			top = false;
+		if (player_pos.x < boss_pos.x)
+			left = false;
+		else
+			right = false;
+
+		if (boss_pos.y < 500)
+			bottom = false;
+		else
+			top = false;
+		if (boss_pos.x < 900)
+			left = false;
+		else
+			right = false;
+
+		if (!top && !bottom && !left && !right)
+		{
+			top = bottom = left = right = true;
+
+			if (boss_pos.y < 500)
+				bottom = false;
+			else
+				top = false;
+			if (boss_pos.x < 900)
+				left = false;
+			else
+				right = false;
+		}
+
+		if (top)
+			return boss_pos + Vec2(0, 100);
+		if (bottom)
+			return boss_pos + Vec2(0, -100);
+		if (left)
+			return boss_pos + Vec2(-200, 0);
+		if (right)
+			return boss_pos + Vec2(200, 0);
+	}
 };
