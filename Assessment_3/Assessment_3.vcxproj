@@ -103,7 +103,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\aaron.andrews\Source\Repos\Assessment_3\Assessment_3\Components;C:\Users\aaron.andrews\Source\Repos\Assessment_3\Lib;C:\Users\aaron.andrews\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\Aquin\Source\Repos\Assessment_3\Lib;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfw_d.lib;Math_Library.lib;sfw_d.lib;Math_Library.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfw_d.lib;Math_Library.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,7 +141,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\aaron.andrews\Source\Repos\Assessment_3\Assessment_3\Components;C:\Users\aaron.andrews\Source\Repos\Assessment_3\Lib;C:\Users\aaron.andrews\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\Aquin\Source\Repos\Assessment_3\Lib;C:\Users\Aquin\Source\Repos\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Lib;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Math_Library;C:\Users\aaron.andrews\Documents\Visual Studio 2015\Projects\Assessment_3\Assessment_3\Components;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>swf.lib;Math_Library.lib;sfw.lib;Math_Library.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfw.lib;Math_Library.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
